@@ -1,4 +1,5 @@
 
+
 $(document).ready(function() { 
 
     function getLocalStorage(key) {
@@ -53,5 +54,11 @@ $(document).ready(function() {
             return hours + time;
         }
     formatTime();
-});
     
+    // add to local storage on save button
+    var saveBtn = $('.saveBtn');
+    saveBtn.on('click', function(){
+        let eventId = $(this).attr('id');
+        let eventText = $(this).parent().siblings().children('.description').val();
+        localStorage.setItem(eventId, eventText);
+});});
