@@ -1,14 +1,10 @@
-
-
-$(document).ready(function() { 
-
-    function getLocalStorage(key) {
+     function getLocalStorage(key) {
         let value = localStorage.getItem(key);
         if (value) {
             $(`#text${key}`).text(value);
         }
     }
-    // console.log(moment());
+    $(document).ready(function() {
     
     
     // Calling moment variable
@@ -54,6 +50,23 @@ $(document).ready(function() {
             return hours + time;
         }
     formatTime();
+    
+    // Function for updating color
+    function updateColors(){
+        var currentTime = new Date().getHours();
+        for (var i = 9; i < 18; i++) { 
+        console.log(currentTime, $(`#${i}`).data("time"));
+         if ($(`#${i}`).data("time") == currentTime){
+            $(`#text${i}`).addClass( "present");
+        } else if (currentTime < $(`#${i}`).data("time")) {
+            $(`#text${i}`).addClass( "future");
+        }
+    }
+}
+
+setInterval(function() {
+    updateColors();
+}, 1000);
     
     // add to local storage on save button
     var saveBtn = $('.saveBtn');
